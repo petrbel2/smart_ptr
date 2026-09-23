@@ -1,7 +1,7 @@
 template <typename T>
 class UnqPtr {
     private:
-        T* data
+        T* data;
     public:
         UnqPtr(T* p = nullptr): data(p) {}
         ~UnqPtr() {delete data;}
@@ -10,5 +10,5 @@ class UnqPtr {
 
         T operator->() { return data; }
 
-        T get() {return data}
+        T get() {return data; }
 };

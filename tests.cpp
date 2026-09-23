@@ -3,3 +3,4 @@
 #include "ArraySharedPtr.hpp"
 #include "UnqPtr.hpp"
 #include "ArrayUnqPtr.hpp"
+#include <iostream>
