@@ -1,0 +1,5 @@
+#include "tests.hpp"
+#include "SharedPtr.hpp"
+#include "ArraySharedPtr.hpp"
+#include "UnqPtr.hpp"
+#include "ArrayUnqPtr.hpp"
