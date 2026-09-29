@@ -4,6 +4,8 @@ class UnqPtr {
         T* data;
     public:
         UnqPtr(T* p = nullptr): data(p) {}
+        UnqPtr(const UnqPtr&) = delete;
+        UnqPtr& operator=(const UnqPtr&) = delete;
         ~UnqPtr() {delete data;}
 
         T operator*() { return *data; }
@@ -11,4 +13,17 @@ class UnqPtr {
         T operator->() { return data; }
 
         T get() {return data; }
+
+        T* release() {
+            T* tmp = data;
+            data = nullptr;
+            return tmp;
+        }
+
+        void reset(T* p = nullptr) {
+            if (data != p) {
+                delete data;
+                data = p;
+            }
+        }
 };
