@@ -4,13 +4,13 @@ class ArraySharedPtr {
         int* count;
         T* data;
     public:
-        SharedPtr(T* p = nullptr): data(p), count(new int(1)) {}
-        SharedPtr(const SharedPtr& other) {
+        ArraySharedPtr(T* p = nullptr): data(p), count(new int(1)) {}
+        ArraySharedPtr(const ArraySharedPtr& other) {
             data = other.data;
             count = other.count;
             (*count)++;
         }
-        SharedPtr* operator=(const SharedPtr& other) {
+        ArraySharedPtr* operator=(const ArraySharedPtr& other) {
             if (this != &other) {
                 if (other.count == 0) {
                     delete[] data;
@@ -25,7 +25,7 @@ class ArraySharedPtr {
             return *this;
         }
 
-        ~SharedPtr() {
+        ~ArraySharedPtr() {
             (*count)--;
             if (*count == 0) {
                 delete[] data;

@@ -6,6 +6,7 @@
 #include <iostream> 
 
 int main() {
+    /*
     int i = 10;
     UnqPtr trying(&i);
     (*trying)++;
@@ -21,11 +22,15 @@ int main() {
     std::cout<<r;
     std::cout<<*s_1;
     
-    /*
+    
     int* stupid;
     *stupid = 1;
     (*stupid)++;
     std::cout<<*stupid;
     delete stupid;
     */
+    int l = 10;
+    ArrayUnqPtr tr(&l);
+    (*tr)++;
+    std::cout<<*(tr);
 }
