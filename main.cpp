@@ -31,6 +31,6 @@ int main() {
     */
     int l = 10;
     ArrayUnqPtr tr(&l);
-    (*tr)++;
-    std::cout<<*(tr);
+    (*(tr + 3)) = 3;
+    std::cout<<*(tr + 3);
 }

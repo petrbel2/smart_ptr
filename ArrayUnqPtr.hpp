@@ -10,6 +10,8 @@ class ArrayUnqPtr {
 
         T& operator*() const { return *data; }
 
+        T* operator+(int num) const {return (data + num);}
+
         T* operator->() const { return data; }
 
         T* get() const {return data; }
