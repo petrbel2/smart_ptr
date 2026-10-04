@@ -2,8 +2,9 @@ template <typename T>
 class ArrayUnqPtr {
     private:
         T* data;
+        int length;
     public:
-        ArrayUnqPtr(T* p = nullptr): data(p) {}
+        ArrayUnqPtr(T* p = nullptr, int l = 1): data(p), length(l) {}
         ArrayUnqPtr(const ArrayUnqPtr&) = delete;
         ArrayUnqPtr& operator=(const ArrayUnqPtr&) = delete;
         ~ArrayUnqPtr() {delete[] data;}

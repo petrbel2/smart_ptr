@@ -3,8 +3,9 @@ class SharedPtr {
     private:
         int* count;
         T* data;
+        int* length;
     public:
-        SharedPtr(T* p = nullptr): data(p), count(new int(1)) {}
+        SharedPtr(T* p = nullptr, int l = 1): data(p), count(new int(1)), length(new int(l)) {}
         SharedPtr(const SharedPtr& other) {
             data = other.data;
             count = other.count;
