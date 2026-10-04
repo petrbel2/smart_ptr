@@ -11,13 +11,17 @@ class SharedPtr {
             count = other.count;
             (*count)++;
         }
-        SharedPtr* operator=(const SharedPtr& other) {
+        SharedPtr& operator=(const SharedPtr& other) {
             if (this != &other) {
-                if (other.count == 0) {
+                if (*(other.count) == 0) {
                     delete data;
                     delete count;
                 }
                 else {
+                    (*count)--;
+                    if (*count == 0) {
+                        delete data;
+                    }
                     count = other.count;
                     data = other.data;
                     (*count)++;

@@ -10,13 +10,17 @@ class ArraySharedPtr {
             count = other.count;
             (*count)++;
         }
-        ArraySharedPtr* operator=(const ArraySharedPtr& other) {
+        ArraySharedPtr& operator=(const ArraySharedPtr& other) {
             if (this != &other) {
-                if (other.count == 0) {
+                if (*(other.count) == 0) {
                     delete[] data;
                     delete count;
                 }
                 else {
+                    (*count)--;
+                    if (*count == 0) {
+                        delete[] data;
+                    }
                     count = other.count;
                     data = other.data;
                     (*count)++;
