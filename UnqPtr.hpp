@@ -8,11 +8,11 @@ class UnqPtr {
         UnqPtr& operator=(const UnqPtr&) = delete;
         ~UnqPtr() {delete data;}
 
-        T operator*() { return *data; }
+        T& operator*() const { return *data; }
 
-        T operator->() { return data; }
+        T* operator->() const { return data; }
 
-        T get() {return data; }
+        T* get() const {return data; }
 
         T* release() {
             T* tmp = data;

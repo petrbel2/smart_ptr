@@ -8,7 +8,7 @@ class SharedPtr {
         SharedPtr(const SharedPtr& other) {
             data = other.data;
             count = other.count;
-            count++;
+            (*count)++;
         }
         SharedPtr* operator=(const SharedPtr& other) {
             if (this != &other) {
@@ -19,7 +19,7 @@ class SharedPtr {
                 else {
                     count = other.count;
                     data = other.data;
-                    count++;
+                    (*count)++;
                 }
             }
             return *this;
@@ -33,9 +33,9 @@ class SharedPtr {
             }
         }
 
-        T operator*() { return *data; }
+        T& operator*() const { return *data; }
 
-        T operator->() { return data; }
+        T* operator->() const { return data; }
 
-        T get() {return data; }
+        T* get() const {return data; }
 };
