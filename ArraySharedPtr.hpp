@@ -49,5 +49,7 @@ class ArraySharedPtr {
 
         T* operator+(int num) const {return (data + num);}
 
+        T& operator[](int num) const {return *(data + num);}
+
         T* get() const {return data; }
 };

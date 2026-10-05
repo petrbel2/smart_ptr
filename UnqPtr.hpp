@@ -6,6 +6,9 @@ class UnqPtr {
         UnqPtr(T* p = nullptr): data(p) {}
         UnqPtr(const UnqPtr&) = delete;
         UnqPtr& operator=(const UnqPtr&) = delete;
+        UnqPtr(UnqPtr&& other) noexcept : data(other.data) {
+            other.data = nullptr;
+        }
         ~UnqPtr() {delete data;}
 
         T& operator*() const { return *data; }
