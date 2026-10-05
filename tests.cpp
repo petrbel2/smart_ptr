@@ -82,7 +82,7 @@ int t_SharedPtr() {
 
 int t_ArrayUnqPtr() {
     int* g = new int[3]{10, 20, 30};
-    ArrayUnqPtr<int> test_ptr(g, 3);
+    ArrayUnqPtr<int> test_ptr(g);
     int good_counter = 0;
     int result;
     
@@ -127,7 +127,7 @@ int t_ArrayUnqPtr() {
 
 int t_ArraySharedPtr() {
     int* g = new int[3]{10, 20, 30};
-    ArraySharedPtr<int> test_ptr1(g, 3);
+    ArraySharedPtr<int> test_ptr1(g);
     ArraySharedPtr<int> test_ptr2(test_ptr1);
     int good_counter = 0;
     int result;
