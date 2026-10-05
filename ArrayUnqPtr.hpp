@@ -19,7 +19,6 @@ class ArrayUnqPtr {
 
         T* release() {
             T* tmp = data;
-            delete[] data;
             data = nullptr;
             return tmp;
         }

@@ -5,7 +5,18 @@
 #include "ArrayUnqPtr.hpp"
 #include <iostream> 
 
+void run_tests() {
+    int total_counter = 0; 
+    int big_counter; 
+    big_counter = t_UnqPtr();
+    total_counter += big_counter;
+    std::cout<<"UnqPtr testing. successful tests "<<big_counter<<" out of 3\n";
+    std::cout<<"Total successful tests: "<<total_counter<<" out of 3\n";
+    std::cout<<"Failed tests: "<<3 - total_counter<<"\n";
+}
+
 int main() {
+    run_tests();
     /*
     int i = 10;
     UnqPtr trying(&i);
