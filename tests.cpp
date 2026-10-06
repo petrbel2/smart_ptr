@@ -5,6 +5,7 @@
 #include "ArrayUnqPtr.hpp"
 #include <iostream>
 #include <chrono>
+#include <memory>
 
 int t_UnqPtr() {
     int* g = new int[1];
@@ -170,4 +171,35 @@ int t_ArraySharedPtr() {
     catch(const std::runtime_error& error) {std::cout << error.what();}
     
     return good_counter;
+}
+
+int t_comparison() {
+    int iter = 100000;
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < iter; i++) {
+        int* j = new int;
+        UnqPtr testing(j);
+        (*testing) = 1;
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto d_1 = end - start;
+    auto start_2 = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < iter; i++) {
+        std::unique_ptr<int> testing {std::make_unique<int>(1)};
+        *testing = 2;
+    }
+    auto end_2 = std::chrono::high_resolution_clock::now();
+    auto d_2 = end_2 - start_2;
+    auto start_3 = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < iter; i++) {
+        int* l = new int;
+        *l = 1;
+        delete l;
+    }
+    auto end_3 = std::chrono::high_resolution_clock::now();
+    auto d_3 = end_3 - start_3;
+    std::cout<<"Time for custom smart ptr: "<<d_1.count()<<'\n';
+    std::cout<<"Time for standard smart ptr: "<<d_2.count()<<'\n';
+    std::cout<<"Time for basic ptr: "<<d_3.count()<<'\n';
+    return 0;
 }

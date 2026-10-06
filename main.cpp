@@ -1,3 +1,6 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "tests.hpp"
 #include "SharedPtr.hpp"
 #include "ArraySharedPtr.hpp"
@@ -22,6 +25,7 @@ void run_tests() {
     std::cout<<"ArraySharedPtr testing. successful tests "<<big_counter<<" out of 5\n";
     std::cout<<"Total successful tests: "<<total_counter<<" out of 18\n";
     std::cout<<"Failed tests: "<<18 - total_counter<<"\n";
+    t_comparison();
 }
 
 int main() {
@@ -30,4 +34,6 @@ int main() {
     i[1] = 5;
     ArraySharedPtr testing(i);
     std::cout<<testing[1];
+    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+    _CrtDumpMemoryLeaks();
 }
