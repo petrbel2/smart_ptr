@@ -30,12 +30,11 @@ void run_tests() {
 
 int main() {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    int* h = new int[10];
+    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+    _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
     run_tests();
     int* i = new int[2];
     i[1] = 5;
     ArraySharedPtr testing(i);
     std::cout<<testing[1];
-    //_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
-    //_CrtDumpMemoryLeaks();
 }
