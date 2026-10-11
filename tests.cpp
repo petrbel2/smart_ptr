@@ -1,8 +1,6 @@
 #include "tests.hpp"
 #include "SharedPtr.hpp"
-#include "ArraySharedPtr.hpp"
 #include "UnqPtr.hpp"
-#include "ArrayUnqPtr.hpp"
 #include <iostream>
 #include <chrono>
 #include <memory>
@@ -11,6 +9,9 @@ int t_UnqPtr() {
     int* g = new int[1];
     *g = 10;
     UnqPtr test_ptr(g);
+    int* r = new int[1];
+    *r = 11;
+    UnqPtr test_ptr_2(r);
     int good_counter = 0;
     int result;
     try {
@@ -33,10 +34,19 @@ int t_UnqPtr() {
     }
     catch(const std::runtime_error& error) {std::cout<<error.what();}
     try {
-        int* released = test_ptr.release();
+        int* released = test_ptr_2.release();
         if (released == nullptr || *released != 11) {throw std::runtime_error("Incorrect release result in t_UnqPtr!\n");}
         good_counter++;
         delete released;
+    }
+    catch(const std::runtime_error& error) {std::cout << error.what();}
+    try {
+        UnqPtr new_one(std::move(test_ptr));
+        good_counter++;
+        if ((*new_one) != 11) {throw std::runtime_error("Incorrect move operation in t_UnqPtr!\n");}
+        good_counter++;
+        if (test_ptr.get() != nullptr) {throw std::runtime_error("Incorrect move operation in t_UnqPtr!\n");}
+        good_counter++;
     }
     catch(const std::runtime_error& error) {std::cout << error.what();}
     return good_counter;
@@ -84,7 +94,7 @@ int t_SharedPtr() {
 
 int t_ArrayUnqPtr() {
     int* g = new int[3]{10, 20, 30};
-    ArrayUnqPtr<int> test_ptr(g);
+    UnqPtr<int[]> test_ptr(g);
     int good_counter = 0;
     int result;
     
@@ -129,8 +139,8 @@ int t_ArrayUnqPtr() {
 
 int t_ArraySharedPtr() {
     int* g = new int[3]{10, 20, 30};
-    ArraySharedPtr<int> test_ptr1(g);
-    ArraySharedPtr<int> test_ptr2(test_ptr1);
+    SharedPtr<int[]> test_ptr1(g);
+    SharedPtr<int[]> test_ptr2(test_ptr1);
     int good_counter = 0;
     int result;
     
