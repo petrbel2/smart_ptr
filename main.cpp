@@ -6,6 +6,7 @@
 #include "tests.hpp"
 #include "SharedPtr.hpp"
 #include "UnqPtr.hpp"
+#include "benchmarks.hpp"
 #include <iostream> 
 
 void run_tests() {
@@ -25,7 +26,8 @@ void run_tests() {
     std::cout<<"Array SharedPtr testing. successful tests "<<big_counter<<" out of 5\n";
     std::cout<<"Total successful tests: "<<total_counter<<" out of 24\n";
     std::cout<<"Failed tests: "<<24 - total_counter<<"\n";
-    t_comparison();
+    t_comparison(10);
+    t_comparison(100000);
 }
 
 int main() {
