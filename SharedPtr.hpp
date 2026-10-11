@@ -29,6 +29,9 @@ class SharedPtr {
             return *this;
         }
 
+        template <typename U>
+        SharedPtr(const SharedPtr<U>& other) : count(other.count), data(dynamic_cast<T*>(other.get())) {}
+
         ~SharedPtr() {
             (*count)--;
             if (*count == 0) {
@@ -75,6 +78,9 @@ class SharedPtr<T[]> {
             }
             return *this;
         }
+
+        template <typename U>
+        SharedPtr(const SharedPtr<U>& other) : count(other.count), data(dynamic_cast<T*>(other.get())) {}
 
         ~SharedPtr() {
             (*count)--;
