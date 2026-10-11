@@ -16,15 +16,15 @@ void run_tests() {
     std::cout<<"UnqPtr testing. successful tests "<<big_counter<<" out of 7\n";
     big_counter = t_SharedPtr();
     total_counter += big_counter;
-    std::cout<<"SharedPtr testing. successful tests "<<big_counter<<" out of 4\n";
+    std::cout<<"SharedPtr testing. successful tests "<<big_counter<<" out of 7\n";
     big_counter = t_ArrayUnqPtr();
     total_counter += big_counter;
     std::cout<<"Array UnqPtr testing. successful tests "<<big_counter<<" out of 5\n";
     big_counter = t_ArraySharedPtr();
     total_counter += big_counter;
     std::cout<<"Array SharedPtr testing. successful tests "<<big_counter<<" out of 5\n";
-    std::cout<<"Total successful tests: "<<total_counter<<" out of 21\n";
-    std::cout<<"Failed tests: "<<21 - total_counter<<"\n";
+    std::cout<<"Total successful tests: "<<total_counter<<" out of 24\n";
+    std::cout<<"Failed tests: "<<24 - total_counter<<"\n";
     t_comparison();
 }
 

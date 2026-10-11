@@ -88,7 +88,15 @@ int t_SharedPtr() {
         good_counter++;
     }
     catch(const std::runtime_error& error) {std::cout << error.what();}
-    
+    try {
+        SharedPtr new_one(std::move(test_ptr1));
+        good_counter++;
+        if ((*new_one) != 11) {throw std::runtime_error("Incorrect move operation in t_SharedPtr!\n");}
+        good_counter++;
+        if ((*test_ptr1) != 11) {throw std::runtime_error("Incorrect move operation in t_SharedPtr!\n");}
+        good_counter++;
+    }
+    catch(const std::runtime_error& error) {std::cout << error.what();}
     return good_counter;
 }
 
