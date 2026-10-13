@@ -1,3 +1,6 @@
+#ifndef UNQPTR_H 
+#define UNQPTR_H
+
 template <typename T>
 class UnqPtr {
     private:
@@ -6,11 +9,11 @@ class UnqPtr {
         UnqPtr(T* p = nullptr): data(p) {}
         UnqPtr(const UnqPtr&) = delete;
         UnqPtr& operator=(const UnqPtr&) = delete;
-        UnqPtr(UnqPtr&& other) noexcept : data(other.data) {
+        UnqPtr(UnqPtr&& other) noexcept: data(other.data) {
             other.data = nullptr;
         }
         template <typename U>
-        UnqPtr(UnqPtr<U>&& other) : data(dynamic_cast<T*>(other.get())) {}
+        UnqPtr(UnqPtr<U>&& other) : data(dynamic_cast<T*>(other.release())) {}
 
         ~UnqPtr() {delete data;}
 
@@ -45,9 +48,10 @@ class UnqPtr<T[]> {
         UnqPtr(UnqPtr&& other) noexcept : data(other.data) {
             other.data = nullptr;
         }
+
         template <typename U>
-        UnqPtr(UnqPtr<U>&& other) : data(dynamic_cast<T*>(other.get())) {}
-        
+        UnqPtr(UnqPtr<U>&& other) : data(dynamic_cast<T*>(other.release())) {}
+
         ~UnqPtr() {delete[] data;}
 
         T& operator*() const { return *data; }
@@ -77,3 +81,5 @@ class UnqPtr<T[]> {
             }
         }
 };
+
+#endif

@@ -5,6 +5,16 @@
 #include <chrono>
 #include <memory>
 
+class X_1 {
+    public:
+        int data;
+};
+
+class X_2: public X_1 {
+    private:
+        int stupid_field;
+};
+
 int t_UnqPtr() {
     int* g = new int[1];
     *g = 10;
@@ -46,6 +56,15 @@ int t_UnqPtr() {
         if ((*new_one) != 11) {throw std::runtime_error("Incorrect move operation in t_UnqPtr!\n");}
         good_counter++;
         if (test_ptr.get() != nullptr) {throw std::runtime_error("Incorrect move operation in t_UnqPtr!\n");}
+        good_counter++;
+    }
+    catch(const std::runtime_error& error) {std::cout << error.what();}
+    try {
+        UnqPtr x_2(new X_2);
+        x_2->data = 5;
+        UnqPtr<X_1> x_1(std::move(x_2));
+        good_counter++;
+        if (x_1->data != 5) {throw std::runtime_error("Incorrect type change in t_UnqPtr!\n");}
         good_counter++;
     }
     catch(const std::runtime_error& error) {std::cout << error.what();}

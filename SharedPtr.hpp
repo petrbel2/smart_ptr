@@ -1,3 +1,6 @@
+#ifndef SHAREDPTR_H 
+#define SHAREDPTR_H
+
 template <typename T>
 class SharedPtr {
     private:
@@ -20,6 +23,7 @@ class SharedPtr {
                     (*count)--;
                     if (*count == 0) {
                         delete data;
+                        delete count;
                     }
                     count = other.count;
                     data = other.data;
@@ -30,7 +34,7 @@ class SharedPtr {
         }
 
         template <typename U>
-        SharedPtr(const SharedPtr<U>& other) : count(other.count), data(dynamic_cast<T*>(other.get())) {}
+        SharedPtr(const SharedPtr<U>& other) : count(other.count), data(dynamic_cast<T*>(other.get())) {(*count)++;}
 
         ~SharedPtr() {
             (*count)--;
@@ -80,7 +84,7 @@ class SharedPtr<T[]> {
         }
 
         template <typename U>
-        SharedPtr(const SharedPtr<U>& other) : count(other.count), data(dynamic_cast<T*>(other.get())) {}
+        SharedPtr(const SharedPtr<U>& other) : count(other.count), data(dynamic_cast<T*>(other.get())) {(*count)++;}
 
         ~SharedPtr() {
             (*count)--;
@@ -104,3 +108,5 @@ class SharedPtr<T[]> {
 
         T* get() const {return data; }
 };
+
+#endif
